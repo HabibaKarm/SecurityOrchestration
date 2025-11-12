@@ -1,6 +1,6 @@
 ## Project info
 
-**URL**: https://github.com/HabibaKarm/Security-Orchestration.git
+**URL**: https://habibakarm.github.io/SecurityOrchestration/
 
 Follow these steps:
 
