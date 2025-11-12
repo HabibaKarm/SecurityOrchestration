@@ -3,16 +3,18 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { User, LogOut } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { UserRole } from "@/hooks/useAuth";
 
 interface AppLayoutProps {
   children: React.ReactNode;
   onLogout: () => void;
+  userRole: UserRole;
 }
 
-const AppLayout = ({ children, onLogout }: AppLayoutProps) => {
+const AppLayout = ({ children, onLogout, userRole }: AppLayoutProps) => {
   return (
     <>
-      <AppSidebar />
+      <AppSidebar userRole={userRole} />
       <div className="flex-1 flex flex-col">
         {/* Top Navigation */}
         <header className="h-16 border-b border-border bg-card flex items-center justify-between px-4 sm:px-6">

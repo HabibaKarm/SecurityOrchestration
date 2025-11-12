@@ -5,10 +5,13 @@ import {
   Mail,
   Network,
   Lock,
-  Bug,
+  Terminal,
+  Users,
+  Workflow,
   AlertTriangle,
   FileText,
   BarChart3,
+  Monitor,
 } from "lucide-react";
 
 import {
@@ -22,23 +25,44 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { UserRole } from "@/hooks/useAuth";
 
-const menuItems = [
+const adminMenuItems = [
+  { title: "Admin Dashboard", url: "/admin-dashboard", icon: Users },
   { title: "Dashboard", url: "/dashboard", icon: BarChart3 },
+  { title: "Monitoring", url: "/monitoring", icon: Monitor },
   { title: "Phishing Emails", url: "/phishing", icon: Mail },
   { title: "DDoS Attacks", url: "/ddos", icon: Network },
   { title: "Brute Force", url: "/brute-force", icon: Lock },
-  { title: "Malware Detection", url: "/malware", icon: Bug },
+  { title: "Logs Dashboard", url: "/logs", icon: Terminal },
+  { title: "Playbook Config", url: "/playbooks", icon: Workflow },
   { title: "Incidents", url: "/incidents", icon: AlertTriangle },
   { title: "Reports", url: "/reports", icon: FileText },
 ];
 
-export function AppSidebar() {
+const analystMenuItems = [
+  { title: "Monitoring Dashboard", url: "/monitoring-dashboard", icon: Monitor },
+  { title: "Dashboard", url: "/dashboard", icon: BarChart3 },
+  { title: "Phishing Emails", url: "/phishing", icon: Mail },
+  { title: "DDoS Attacks", url: "/ddos", icon: Network },
+  { title: "Brute Force", url: "/brute-force", icon: Lock },
+  { title: "Logs Dashboard", url: "/logs", icon: Terminal },
+  { title: "Incidents", url: "/incidents", icon: AlertTriangle },
+  { title: "Reports", url: "/reports", icon: FileText },
+];
+
+interface AppSidebarProps {
+  userRole: UserRole;
+}
+
+export function AppSidebar({ userRole }: AppSidebarProps) {
   const { open: sidebarOpen } = useSidebar();
   const location = useLocation();
   const currentPath = location.pathname;
 
   const isActive = (path: string) => currentPath === path;
+  
+  const menuItems = userRole === "admin" ? adminMenuItems : analystMenuItems;
 
   return (
     <Sidebar className="border-r border-sidebar-border">
